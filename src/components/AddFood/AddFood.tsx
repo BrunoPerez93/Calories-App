@@ -11,6 +11,7 @@ const AddFood = () => {
 
   const [visible, setVisible] = useState<boolean>(false);
   const [foods, setFoods] = useState<Meal[]>([]);
+  const [search, setSearch] = useState('');
   const { onGetFood } = useFoodStorage();
 
   const loadFoods = async () => {
@@ -33,6 +34,16 @@ const AddFood = () => {
       loadFoods();
     }
     setVisible(false);
+  }
+
+  const handleSearchPress = async () => {
+    try {
+      const result = await onGetFood();
+      setFoods(result.filter((item: Meal) => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())))
+    } catch (error) {
+      console.error(error)
+      setFoods([]);
+    }
   }
 
   return (
@@ -59,7 +70,8 @@ const AddFood = () => {
         <View style={styles.inputContainer}>
           <Input
             placeholder="apple, pie, soda..."
-
+            value={search}
+            onChangeText={(text: string) => setSearch(text)}
           />
         </View>
         <Button
@@ -67,6 +79,7 @@ const AddFood = () => {
           radius='lg'
           color='#6FF085'
           titleStyle={styles.searchBtnTitle}
+          onPress={handleSearchPress}
         />
       </View>
       <ScrollView style={styles.content}>
