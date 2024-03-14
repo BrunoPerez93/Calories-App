@@ -12,3 +12,8 @@ export type RootStacksParams = {
   Home: undefined;
   AddFood: PostImage;
 }
+
+export type FormItemType = {
+  placeholder?: string;
+  text?: string;
+}

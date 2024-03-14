@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Header from "../Header";
 import { Button, Input } from "@rneui/themed";
+import AddFoodModal from "../AddFoodModal";
 
 const AddFood = () => {
+
+  const [visible, setVisible] = useState<boolean>(false);
+
+  const handleModalClose = () => {
+    setVisible(false);
+  }
+
   return (
     <View style={styles.container} >
       <Header />
@@ -14,9 +22,13 @@ const AddFood = () => {
         </View>
 
         <View style={styles.addFoodButtonContainer}>
-          <Button radius="lg" color='#4ecb71'>
-            Add
-          </Button>
+          <Button
+            radius="lg"
+            color='#4ecb71'
+            onPress={() => setVisible(true)}
+            title='+'
+            titleStyle={styles.titleButton}
+          />
         </View>
       </View>
 
@@ -28,12 +40,13 @@ const AddFood = () => {
           />
         </View>
         <Button
-          title='Search'
+          title='Buscar'
           radius='lg'
           color='#6FF085'
           titleStyle={styles.searchBtnTitle}
         />
       </View>
+      <AddFoodModal visible={visible} onClose={handleModalClose} />
     </View>
   )
 }
@@ -69,6 +82,11 @@ const styles = StyleSheet.create({
   searchBtnTitle: {
     color: '#000',
     fontSize: 14,
+  },
+  titleButton: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: 30,
   }
 })
 

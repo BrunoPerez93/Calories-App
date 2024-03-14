@@ -26,9 +26,9 @@ const CaloriesTitle = () => {
             radius="lg"
             color='#4ecb71'
             onPress={handleAddCaloriesPress}
-          >
-            Add
-          </Button>
+            title='+'
+            titleStyle={styles.titleButton}
+          />
 
         </View>
       </View>
@@ -57,6 +57,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: 50,
+  },
+  titleButton: {
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 })
 
