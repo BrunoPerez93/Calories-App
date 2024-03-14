@@ -1,14 +1,37 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 import Header from "../Header";
 import { Button, Input } from "@rneui/themed";
 import AddFoodModal from "../AddFoodModal";
+import useFoodStorage from "../../hooks/useFoodStorage";
+import { Meal } from "../../types";
+import MealItem from "./MealItem";
 
 const AddFood = () => {
 
   const [visible, setVisible] = useState<boolean>(false);
+  const [foods, setFoods] = useState<Meal[]>([]);
+  const { onGetFood } = useFoodStorage();
 
-  const handleModalClose = () => {
+  const loadFoods = async () => {
+    try {
+      const foodResposne = await onGetFood();
+      setFoods(foodResposne);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    loadFoods().catch(null)
+  }, [])
+
+  const handleModalClose = async (shouldUpdate?: boolean) => {
+    if (shouldUpdate) {
+      Alert.alert('Comida guardada exitosamente')
+      loadFoods();
+    }
     setVisible(false);
   }
 
@@ -46,7 +69,12 @@ const AddFood = () => {
           titleStyle={styles.searchBtnTitle}
         />
       </View>
+      <ScrollView style={styles.content}>
+        {foods?.map(meal => <MealItem key={`my-meal-item-${meal.name}`} {...meal} />)}
+      </ScrollView>
+
       <AddFoodModal visible={visible} onClose={handleModalClose} />
+
     </View>
   )
 }
@@ -89,6 +117,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     width: 30,
+  },
+  content: {
   }
 })
 
