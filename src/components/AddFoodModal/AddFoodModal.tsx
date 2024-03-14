@@ -1,5 +1,5 @@
 import { Button, Input, Text } from "@rneui/themed";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Modal, StyleSheet, View } from "react-native";
 import FormItem from "./FormItem";
 
@@ -9,6 +9,23 @@ type AddFoodModalProps = {
 }
 
 const AddFoodModal: FC<AddFoodModalProps> = ({ onClose, visible }) => {
+
+  const [calories, setCalories] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [portion, setPortion] = useState<string>('');
+
+  useEffect(() => {
+    setCalories('')
+    setName('')
+    setPortion('')
+  }, [visible])
+
+  const handleAddFood = () => {
+
+
+    onClose();
+  }
+
   return (
     <Modal
       visible={visible}
@@ -28,21 +45,29 @@ const AddFoodModal: FC<AddFoodModalProps> = ({ onClose, visible }) => {
           </View>
           <FormItem
             placeholder="Calorias"
-            text="KCAL"
+            text="CAL"
+            value={calories}
+            onChangeText={(text: string) => setCalories(text)}
           />
           <FormItem
             placeholder="Nombre"
-            text="Nomber"
+            text="Nombre"
+            value={name}
+            onChangeText={(text: string) => setName(text)}
           />
           <FormItem
             placeholder="Porcion"
             text="Porcion"
+            value={portion}
+            onChangeText={(text: string) => setPortion(text)}
           />
           <View style={styles.buttonContainer}>
             <Button
               title='Agregar'
               radius='lg'
               color='#6FF085'
+              onPress={handleAddFood}
+              disabled={calories.trim() === '' || portion.trim() === '' || name.trim() === ''}
             />
           </View>
         </View>

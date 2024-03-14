@@ -1,16 +1,19 @@
 import { Input, Text } from "@rneui/themed";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { FormItemType } from "../../types";
 
 
 
-const FormItem: FC<FormItemType> = ({ placeholder, text }) => {
+const FormItem: FC<FormItemType> = ({ placeholder, text, value, onChangeText }) => {
+
   return (
     <View style={styles.formItem}>
       <View style={styles.inputContainer}>
         <Input
           placeholder={placeholder}
+          value={value}
+          onChangeText={onChangeText}
         />
       </View>
       <View style={styles.textContainer}>

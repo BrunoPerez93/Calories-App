@@ -17,7 +17,7 @@ const CaloriesTitle = () => {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <Text style={styles.calories}>Calories</Text>
+        <Text style={styles.calories}>Calorias</Text>
       </View>
       <View style={styles.rightContainer}>
         <View style={styles.buttonContainer}>

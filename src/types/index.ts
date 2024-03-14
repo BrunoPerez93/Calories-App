@@ -16,4 +16,12 @@ export type RootStacksParams = {
 export type FormItemType = {
   placeholder?: string;
   text?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
+}
+
+export type Meal = {
+  calories: string;
+  name: string;
+  portion: string;
 }
