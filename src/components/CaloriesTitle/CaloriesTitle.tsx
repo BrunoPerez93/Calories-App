@@ -27,7 +27,7 @@ const CaloriesTitle = () => {
             color='#4ecb71'
             onPress={handleAddCaloriesPress}
           >
-            <Icon name="add-circle-sharp" color='#fff' />
+            Add
           </Button>
 
         </View>

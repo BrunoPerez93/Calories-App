@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, Icon } from "@rneui/themed";
+import { Button } from "@rneui/themed";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
@@ -22,7 +22,7 @@ const Header = () => {
             type="clear"
             onPress={() => goBack()}
           >
-            <Icon name="arrow" size={24} />
+            {'Return'}
           </Button>
         </View>
       ) : undefined}
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
   },
   arrowContainer: {
-
+    marginLeft: -12,
   }
 })
 
