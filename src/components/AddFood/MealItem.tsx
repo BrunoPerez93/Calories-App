@@ -1,9 +1,23 @@
 import { Button, Text } from "@rneui/themed";
 import React, { FC } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { Meal } from "../../types";
+import useFoodStorage from "../../hooks/useFoodStorage";
 
 const MealItem: FC<Meal> = ({ calories, portion, name }) => {
+
+  const { onSaveTodayFood } = useFoodStorage();
+  const handleAddItemPress = async () => {
+    try {
+      await onSaveTodayFood({ calories, portion, name })
+      Alert.alert('Comida agregada al dia')
+    } catch (error) {
+      console.error(error)
+      Alert.alert('Comida no agregada')
+
+    }
+  };
+  
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
@@ -15,6 +29,7 @@ const MealItem: FC<Meal> = ({ calories, portion, name }) => {
           title='+'
           type="clear"
           titleStyle={styles.buttonTitle}
+          onPress={handleAddItemPress}
         />
         <Text style={styles.calories}>{calories}</Text>
 
@@ -30,7 +45,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 12,
     flexDirection: 'row',
-   },
+  },
   leftContainer: {
     flex: 1,
     justifyContent: 'center',

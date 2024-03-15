@@ -24,4 +24,12 @@ export type Meal = {
   calories: string;
   name: string;
   portion: string;
+  date?: string;
+}
+
+export type TodayCaloriesProps = {
+  total?: number | string;
+  consume: number | string;
+  remaining: number | string;
+  percentage: number;
 }
