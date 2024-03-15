@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Header from "../Header";
-import CaloriesTitle from "../CaloriesTitle";
+import Header from "../../components/Header";
+import CaloriesTitle from "../../components/CaloriesTitle";
 import useFoodStorage from "../../hooks/useFoodStorage";
 import { useFocusEffect } from "@react-navigation/native";
 import { Meal, TodayCaloriesProps } from "../../types";
-import TodayCalories from "../TodayCalories";
+import TodayCalories from "../../components/TodayCalories";
 import TodayMeals from "../../TodayMeals";
 
 const totalCaloriesPerDay = 2000;

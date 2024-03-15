@@ -8,9 +8,20 @@ export type PostImage = {
   url?: string;
 }
 
+export type LoginProps ={
+  username?: string;
+  password?: string;
+}
+
+export type RegisterProps = LoginProps &{
+  repeatPassword?: string;
+}
+
 export type RootStacksParams = {
   Home: undefined;
   AddFood: PostImage;
+  Login: LoginProps;
+  Register: RegisterProps;
 }
 
 export type FormItemType = {

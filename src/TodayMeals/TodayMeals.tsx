@@ -2,7 +2,7 @@ import { Text } from "@rneui/themed";
 import React, { FC } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Meal, TodayMealsProps } from "../types";
-import MealItem from "../components/AddFood/MealItem";
+import MealItem from "../views/AddFood/MealItem";
 
 
 const TodayMeals: FC<TodayMealsProps> = ({ foods, onCompleteAddRemove }) => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
-import Header from "../Header";
+import Header from "../../components/Header";
 import { Button, Input } from "@rneui/themed";
-import AddFoodModal from "../AddFoodModal";
+import AddFoodModal from "../../components/AddFoodModal";
 import useFoodStorage from "../../hooks/useFoodStorage";
 import { Meal } from "../../types";
 import MealItem from "./MealItem";

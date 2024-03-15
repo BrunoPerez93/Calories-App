@@ -47,7 +47,7 @@ const MealItem: FC<MealItemProps> = ({
           titleStyle={styles.buttonTitle}
           onPress={handleIconPress}
         />
-        <Text style={styles.calories}>{calories}</Text>
+        <Text style={styles.calories}>{`${calories} cal`}</Text>
 
       </View>
     </View>
