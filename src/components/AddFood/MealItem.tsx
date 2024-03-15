@@ -1,23 +1,39 @@
 import { Button, Text } from "@rneui/themed";
 import React, { FC } from "react";
 import { Alert, StyleSheet, View } from "react-native";
-import { Meal } from "../../types";
+import { MealItemProps } from "../../types";
 import useFoodStorage from "../../hooks/useFoodStorage";
 
-const MealItem: FC<Meal> = ({ calories, portion, name }) => {
+const MealItem: FC<MealItemProps> = ({
+  calories,
+  portion,
+  name,
+  isAbleToAdd,
+  onCompleteAddRemove,
+  itemPosition,
+}) => {
 
-  const { onSaveTodayFood } = useFoodStorage();
-  const handleAddItemPress = async () => {
+  const { onSaveTodayFood, onDeleteTodayFood } = useFoodStorage();
+
+  const handleIconPress = async () => {
     try {
-      await onSaveTodayFood({ calories, portion, name })
-      Alert.alert('Comida agregada al dia')
+      if (!isAbleToAdd) {
+
+        await onSaveTodayFood({ calories, portion, name })
+        Alert.alert('Comida agregada al dia')
+      } else {
+        await onDeleteTodayFood(itemPosition ?? -1)
+        Alert.alert('Comida eliminada');
+      }
+
+      onCompleteAddRemove?.();
     } catch (error) {
       console.error(error)
       Alert.alert('Comida no agregada')
 
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
@@ -26,10 +42,10 @@ const MealItem: FC<Meal> = ({ calories, portion, name }) => {
       </View>
       <View style={styles.rightContainer}>
         <Button
-          title='+'
+          title={isAbleToAdd ? 'X' : '+'}
           type="clear"
           titleStyle={styles.buttonTitle}
-          onPress={handleAddItemPress}
+          onPress={handleIconPress}
         />
         <Text style={styles.calories}>{calories}</Text>
 
@@ -68,6 +84,8 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 20,
     margin: -8,
+    padding: 10,
+    fontWeight: 'bold',
   },
   calories: {
     color: '#000',

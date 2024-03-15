@@ -27,8 +27,8 @@ const Header = () => {
         </View>
       ) : undefined}
       <View style={styles.leftContainer}>
-        <Text style={styles.name}>{`Hello ${staticInfo.name}`}</Text>
-        <Text style={styles.subtitle}>Welcome back to your goal</Text>
+        <Text style={styles.name}>{`Hola ${staticInfo.name}`}</Text>
+        <Text style={styles.subtitle}>Bienvenido a tu meta</Text>
       </View>
 
       <View style={styles.rigthContainer}>

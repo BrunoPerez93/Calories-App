@@ -6,12 +6,19 @@ import useFoodStorage from "../../hooks/useFoodStorage";
 import { useFocusEffect } from "@react-navigation/native";
 import { Meal, TodayCaloriesProps } from "../../types";
 import TodayCalories from "../TodayCalories";
+import TodayMeals from "../../TodayMeals";
+
+const totalCaloriesPerDay = 2000;
 
 const Home = () => {
 
-  const totalCaloriesPerDay = 2000;
   const [todayFood, setTodayFood] = useState<Meal[]>([]);
-  const [todayStadistics, setTodayStadistics] = useState<TodayCaloriesProps>({});
+  const [todayStadistics, setTodayStadistics] = useState<TodayCaloriesProps>({
+    consume: 0,
+    percentage: 0,
+    total: totalCaloriesPerDay,
+    remaining: 0,
+  });
 
   const { onGetTodayFood } = useFoodStorage();
 
@@ -26,6 +33,7 @@ const Home = () => {
         consume: caloriesConsumed,
         percentage,
         remaining: remainingCalories,
+        total: totalCaloriesPerDay,
       });
     } catch (error) {
       console.error(error)
@@ -53,7 +61,10 @@ const Home = () => {
     <View style={styles.container}>
       <Header />
       <CaloriesTitle />
-      <TodayCalories {...todayStadistics}/>
+      <TodayCalories {...todayStadistics} />
+      <TodayMeals
+        foods={todayFood}
+        onCompleteAddRemove={() => loadTodayFood()} />
     </View>
   )
 }
